@@ -1207,7 +1207,6 @@ static void twiddle_input(
   
   INT local_n_total = PX(prod_INT)(ths->rnk_n, local_ni);
   int tempbool=ths->pfft_flags & PFFT_SHIFTED_IN;
-/*#pragma omp parallel for schedule(static,16)*/
   
 #pragma omp parallel for schedule(static,8) private(factor,l)
   for(INT k=0; k<local_n_total; k++){
@@ -1261,7 +1260,7 @@ static void twiddle_output(
     howmany *= 2;
 
   INT local_n_total = PX(prod_INT)(ths->rnk_n, local_no);
-/*#pragma omp parallel for */
+
 #pragma omp parallel for schedule(static,8) private(factor,l)
   for(INT k=0; k<local_n_total; k++){
     l = k;
